@@ -20,7 +20,7 @@ namespace TriangleNet.IO
     {
         static NumberFormatInfo nfi = NumberFormatInfo.InvariantInfo;
 
-        int startIndex = 0;
+        int startIndex;
 
         #region Helper methods
 
@@ -74,7 +74,7 @@ namespace TriangleNet.IO
             var v = new Vertex(x, y);
 
             // Read a vertex marker.
-            if (marks > 0 && line.Length > 3 + attributes)
+            if ((marks > 0) && (line.Length > (3 + attributes)))
             {
                 v.Label = int.Parse(line[3 + attributes]);
             }
@@ -135,7 +135,7 @@ namespace TriangleNet.IO
 
             string path = Path.ChangeExtension(filename, ".ele");
 
-            if (File.Exists(path) && geometry != null)
+            if (File.Exists(path) && (geometry != null))
             {
                 triangles = ReadEleFile(path);
             }
@@ -396,7 +396,7 @@ namespace TriangleNet.IO
                     end2 = int.Parse(line[2]) - startIndex;
                     mark = 0;
 
-                    if (segmentmarkers > 0 && line.Length > 3)
+                    if ((segmentmarkers > 0) && (line.Length > 3))
                     {
                         mark = int.Parse(line[3]);
                     }
@@ -586,7 +586,7 @@ namespace TriangleNet.IO
                         int.Parse(line[3]) - startIndex);
 
                     // Read triangle region
-                    if (attributes > 0 && validRegion)
+                    if ((attributes > 0) && validRegion)
                     {
                         int region = 0;
                         validRegion = int.TryParse(line[4], out region);
@@ -715,7 +715,7 @@ namespace TriangleNet.IO
                     end2 = int.Parse(line[2]) - startIndex;
                     mark = 0;
 
-                    if (edgemarkers > 0 && line.Length > 3)
+                    if ((edgemarkers > 0) && (line.Length > 3))
                     {
                         mark = int.Parse(line[3]);
                     }

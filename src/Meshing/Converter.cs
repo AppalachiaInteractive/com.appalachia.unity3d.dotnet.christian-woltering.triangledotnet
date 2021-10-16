@@ -239,7 +239,7 @@ namespace TriangleNet.Meshing
 
                     boundmarker = polygon.Segments[i].Label;
 
-                    if ((sorg.id < 0 || sorg.id >= mesh.invertices) || (sdest.id < 0 || sdest.id >= mesh.invertices))
+                    if (((sorg.id < 0) || (sorg.id >= mesh.invertices)) || ((sdest.id < 0) || (sdest.id >= mesh.invertices)))
                     {
                         Log.Instance.Error("Segment has an invalid vertex index.", "MeshReader.Reconstruct()");
                         throw new Exception("Segment has an invalid vertex index.");
@@ -410,7 +410,7 @@ namespace TriangleNet.Meshing
 
                     nid = neighbor.tri.id;
 
-                    if (id < nid || nid < 0)
+                    if ((id < nid) || (nid < 0))
                     {
                         face = faces[id];
 

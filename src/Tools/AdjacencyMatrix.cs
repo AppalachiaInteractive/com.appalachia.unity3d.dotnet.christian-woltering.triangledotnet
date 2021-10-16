@@ -150,7 +150,7 @@ namespace TriangleNet.Tools
                 // is the first of the pair in which the edge occurs (tid < nid).
                 nid = tri.neighbors[2].tri.id;
 
-                if (nid < 0 || tid < nid)
+                if ((nid < 0) || (tid < nid))
                 {
                     pcol[n1] += 1;
                     pcol[n2] += 1;
@@ -159,7 +159,7 @@ namespace TriangleNet.Tools
                 // Add edge (2,3).
                 nid = tri.neighbors[0].tri.id;
 
-                if (nid < 0 || tid < nid)
+                if ((nid < 0) || (tid < nid))
                 {
                     pcol[n2] += 1;
                     pcol[n3] += 1;
@@ -168,7 +168,7 @@ namespace TriangleNet.Tools
                 // Add edge (3,1).
                 nid = tri.neighbors[1].tri.id;
 
-                if (nid < 0 || tid < nid)
+                if ((nid < 0) || (tid < nid))
                 {
                     pcol[n3] += 1;
                     pcol[n1] += 1;
@@ -237,7 +237,7 @@ namespace TriangleNet.Tools
                 // is the first of the pair in which the edge occurs (tid < nid).
                 nid = tri.neighbors[2].tri.id;
 
-                if (nid < 0 || tid < nid)
+                if ((nid < 0) || (tid < nid))
                 {
                     list[col[n1]++] = n2;
                     list[col[n2]++] = n1;
@@ -246,7 +246,7 @@ namespace TriangleNet.Tools
                 // Add edge (2,3).
                 nid = tri.neighbors[0].tri.id;
 
-                if (nid < 0 || tid < nid)
+                if ((nid < 0) || (tid < nid))
                 {
                     list[col[n2]++] = n3;
                     list[col[n3]++] = n2;
@@ -255,7 +255,7 @@ namespace TriangleNet.Tools
                 // Add edge (3,1).
                 nid = tri.neighbors[1].tri.id;
 
-                if (nid < 0 || tid < nid)
+                if ((nid < 0) || (tid < nid))
                 {
                     list[col[n1]++] = n3;
                     list[col[n3]++] = n1;

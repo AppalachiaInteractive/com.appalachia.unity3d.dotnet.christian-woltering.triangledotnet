@@ -171,8 +171,8 @@ namespace TriangleNet.Geometry
         /// <returns>Return true, if this rectangle contains given rectangle.</returns>
         public bool Contains(Rectangle other)
         {
-            return (xmin <= other.Left && other.Right <= xmax
-                && ymin <= other.Bottom && other.Top <= ymax);
+            return ((xmin <= other.Left) && (other.Right <= xmax)
+                                         && (ymin <= other.Bottom) && (other.Top <= ymax));
         }
 
         /// <summary>
@@ -182,8 +182,8 @@ namespace TriangleNet.Geometry
         /// <returns>Return true, if given rectangle intersects this rectangle.</returns>
         public bool Intersects(Rectangle other)
         {
-            return (other.Left < xmax && xmin < other.Right
-                && other.Bottom < ymax && ymin < other.Top);
+            return ((other.Left < xmax) && (xmin < other.Right)
+                                        && (other.Bottom < ymax) && (ymin < other.Top));
         }
     }
 }

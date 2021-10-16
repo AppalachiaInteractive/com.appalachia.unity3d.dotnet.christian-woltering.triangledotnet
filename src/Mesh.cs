@@ -41,9 +41,9 @@ namespace TriangleNet
         public Dictionary<int, Vertex> vertices;
 
         // Hash seeds (should belong to mesh instance)
-        public int hash_vtx = 0;
-        public int hash_seg = 0;
-        public int hash_tri = 0;
+        public int hash_vtx;
+        public int hash_seg;
+        public int hash_tri;
 
         public List<Point> holes;
         public List<RegionPointer> regions;
@@ -146,7 +146,7 @@ namespace TriangleNet
         /// </summary>
         public int NumberOfEdges
         {
-            get { return (3 * triangles.Count + hullsize) / 2; }
+            get { return ((3 * triangles.Count) + hullsize) / 2; }
         }
 
         /// <summary>
@@ -1502,7 +1502,7 @@ namespace TriangleNet
             bestvertex = besttri.Dest();
             besttri.Copy(ref testtri);
 
-            for (int i = 2; i <= edgecount - 2; i++)
+            for (int i = 2; i <= (edgecount - 2); i++)
             {
                 testtri.Onext();
                 testvertex = testtri.Dest();
@@ -1522,7 +1522,7 @@ namespace TriangleNet
                 TriangulatePolygon(firstedge, tempedge, bestnumber + 1, true, triflaws);
             }
 
-            if (bestnumber < edgecount - 2)
+            if (bestnumber < (edgecount - 2))
             {
                 // Recursively triangulate the smaller polygon on the left.
                 besttri.Sym(ref tempedge);

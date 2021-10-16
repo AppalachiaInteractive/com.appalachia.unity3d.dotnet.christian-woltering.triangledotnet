@@ -68,7 +68,7 @@ namespace TriangleNet
                         oppotri.Sym(ref oppooppotri);
                         if ((tri.tri != oppooppotri.tri) || (tri.orient != oppooppotri.orient))
                         {
-                            if (tri.tri == oppooppotri.tri && Log.Verbose)
+                            if ((tri.tri == oppooppotri.tri) && Log.Verbose)
                             {
                                 logger.Warning("Asymmetric triangle-triangle bond: (Right triangle, wrong orientation)",
                                     "MeshValidator.IsConsistent()");
@@ -98,7 +98,7 @@ namespace TriangleNet
             mesh.MakeVertexMap();
             foreach (var v in mesh.vertices.Values)
             {
-                if (v.tri.tri == null && Log.Verbose)
+                if ((v.tri.tri == null) && Log.Verbose)
                 {
                     logger.Warning("Vertex (ID " + v.id + ") not connected to mesh (duplicate input vertex?)",
                                 "MeshValidator.IsConsistent()");

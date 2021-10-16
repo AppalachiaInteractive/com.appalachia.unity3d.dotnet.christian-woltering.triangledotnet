@@ -80,7 +80,7 @@ namespace TriangleNet.Meshing.Data
                 // Find an approximation by repeated squaring of two.
                 expincrement = 1;
                 multiplier = 0.5;
-                while (length * multiplier * multiplier > 1.0)
+                while ((length * multiplier * multiplier) > 1.0)
                 {
                     expincrement *= 2;
                     multiplier *= multiplier;
@@ -90,7 +90,7 @@ namespace TriangleNet.Meshing.Data
                 length *= multiplier;
             }
             // 'length' is approximately squareroot(2.0) to what exponent?
-            exponent = 2 * exponent + (length > SQRT2 ? 1 : 0);
+            exponent = (2 * exponent) + (length > SQRT2 ? 1 : 0);
             // 'exponent' is now in the range 0...2047 for IEEE double precision.
             // Choose a queue in the range 0...4095.  The shortest edges have the
             // highest priority (queue 4095).

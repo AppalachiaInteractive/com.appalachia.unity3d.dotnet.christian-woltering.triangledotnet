@@ -8,9 +8,6 @@
 namespace TriangleNet.Tools
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using TriangleNet.Geometry;
 
     /// <summary>
@@ -192,13 +189,13 @@ namespace TriangleNet.Tools
 
                 lx = a.x - b.x;
                 ly = a.y - b.y;
-                ab = Math.Sqrt(lx * lx + ly * ly);
+                ab = Math.Sqrt((lx * lx) + (ly * ly));
                 lx = b.x - c.x;
                 ly = b.y - c.y;
-                bc = Math.Sqrt(lx * lx + ly * ly);
+                bc = Math.Sqrt((lx * lx) + (ly * ly));
                 lx = c.x - a.x;
                 ly = c.y - a.y;
-                ca = Math.Sqrt(lx * lx + ly * ly);
+                ca = Math.Sqrt((lx * lx) + (ly * ly));
 
                 area = areaMeasure.Measure(a, b, c);
                 alphaMeasure.Measure(ab, bc, ca, area);
@@ -273,9 +270,9 @@ namespace TriangleNet.Tools
             // Maximum area
             public double area_max = -double.MaxValue;
             // Total area of geometry
-            public double area_total = 0;
+            public double area_total;
             // Nmber of triangles with zero area
-            public int area_zero = 0;
+            public int area_zero;
 
             /// <summary>
             /// Reset all values.
@@ -297,7 +294,7 @@ namespace TriangleNet.Tools
             /// <returns>Triangle area.</returns>
             public double Measure(Point a, Point b, Point c)
             {
-                double area = 0.5 * Math.Abs(a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y));
+                double area = 0.5 * Math.Abs((a.x * (b.y - c.y)) + (b.x * (c.y - a.y)) + (c.x * (a.y - b.y)));
 
                 area_min = Math.Min(area_min, area);
                 area_max = Math.Max(area_max, area);
@@ -383,39 +380,39 @@ namespace TriangleNet.Tools
                 double c_angle;
 
                 // Take care of a ridiculous special case.
-                if (ab == 0.0 && bc == 0.0 && ca == 0.0)
+                if ((ab == 0.0) && (bc == 0.0) && (ca == 0.0))
                 {
-                    a_angle = 2.0 * Math.PI / 3.0;
-                    b_angle = 2.0 * Math.PI / 3.0;
-                    c_angle = 2.0 * Math.PI / 3.0;
+                    a_angle = (2.0 * Math.PI) / 3.0;
+                    b_angle = (2.0 * Math.PI) / 3.0;
+                    c_angle = (2.0 * Math.PI) / 3.0;
                 }
                 else
                 {
-                    if (ca == 0.0 || ab == 0.0)
+                    if ((ca == 0.0) || (ab == 0.0))
                     {
                         a_angle = Math.PI;
                     }
                     else
                     {
-                        a_angle = acos((ca2 + ab2 - bc2) / (2.0 * ca * ab));
+                        a_angle = acos(((ca2 + ab2) - bc2) / (2.0 * ca * ab));
                     }
 
-                    if (ab == 0.0 || bc == 0.0)
+                    if ((ab == 0.0) || (bc == 0.0))
                     {
                         b_angle = Math.PI;
                     }
                     else
                     {
-                        b_angle = acos((ab2 + bc2 - ca2) / (2.0 * ab * bc));
+                        b_angle = acos(((ab2 + bc2) - ca2) / (2.0 * ab * bc));
                     }
 
-                    if (bc == 0.0 || ca == 0.0)
+                    if ((bc == 0.0) || (ca == 0.0))
                     {
                         c_angle = Math.PI;
                     }
                     else
                     {
-                        c_angle = acos((bc2 + ca2 - ab2) / (2.0 * bc * ca));
+                        c_angle = acos(((bc2 + ca2) - ab2) / (2.0 * bc * ca));
                     }
                 }
 
@@ -424,7 +421,7 @@ namespace TriangleNet.Tools
                 alpha = Math.Min(alpha, c_angle);
 
                 // Normalize angle from [0,pi/3] radians into qualities in [0,1].
-                alpha = alpha * 3.0 / Math.PI;
+                alpha = (alpha * 3.0) / Math.PI;
 
                 alpha_ave += alpha;
                 alpha_area += area * alpha;
@@ -505,7 +502,7 @@ namespace TriangleNet.Tools
             /// <returns></returns>
             public double Measure(double ab, double bc, double ca, double area)
             {
-                double q = (bc + ca - ab) * (ca + ab - bc) * (ab + bc - ca) / (ab * bc * ca);
+                double q = (((bc + ca) - ab) * ((ca + ab) - bc) * ((ab + bc) - ca)) / (ab * bc * ca);
 
                 q_min = Math.Min(q_min, q);
                 q_max = Math.Max(q_max, q);

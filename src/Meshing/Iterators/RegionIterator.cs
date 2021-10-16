@@ -54,7 +54,7 @@ namespace TriangleNet.Meshing.Iterators
         {
             // Make sure the triangle under consideration still exists.
             // It may have been eaten by the virus.
-            if (triangle.id == Mesh.DUMMY || Otri.IsDead(triangle))
+            if ((triangle.id == Mesh.DUMMY) || Otri.IsDead(triangle))
             {
                 return;
             }

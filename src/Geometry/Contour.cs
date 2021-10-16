@@ -172,8 +172,8 @@ namespace TriangleNet.Geometry
                 else
                 {
                     // Direction [midpoint(a-c) -> corner point]
-                    dx = (a.x + c.x) / 2 - bx;
-                    dy = (a.y + c.y) / 2 - by;
+                    dx = ((a.x + c.x) / 2) - bx;
+                    dy = ((a.y + c.y) / 2) - by;
                 }
 
                 // Move around the contour.
@@ -185,8 +185,8 @@ namespace TriangleNet.Geometry
                 for (int j = 0; j < limit; j++)
                 {
                     // Search in direction.
-                    test.x = bx + dx * h;
-                    test.y = by + dy * h;
+                    test.x = bx + (dx * h);
+                    test.y = by + (dy * h);
 
                     if (bounds.Contains(test) && IsPointInPolygon(test, contour))
                     {
@@ -194,8 +194,8 @@ namespace TriangleNet.Geometry
                     }
 
                     // Search in opposite direction (see NOTE above).
-                    test.x = bx - dx * h;
-                    test.y = by - dy * h;
+                    test.x = bx - (dx * h);
+                    test.y = by - (dy * h);
 
                     if (bounds.Contains(test) && IsPointInPolygon(test, contour))
                     {
@@ -232,10 +232,10 @@ namespace TriangleNet.Geometry
 
             for (int i = 0, j = count - 1; i < count; i++)
             {
-                if (((poly[i].y < y && poly[j].y >= y) || (poly[j].y < y && poly[i].y >= y))
-                    && (poly[i].x <= x || poly[j].x <= x))
+                if ((((poly[i].y < y) && (poly[j].y >= y)) || ((poly[j].y < y) && (poly[i].y >= y)))
+                    && ((poly[i].x <= x) || (poly[j].x <= x)))
                 {
-                    inside ^= (poly[i].x + (y - poly[i].y) / (poly[j].y - poly[i].y) * (poly[j].x - poly[i].x) < x);
+                    inside ^= ((poly[i].x + (((y - poly[i].y) / (poly[j].y - poly[i].y)) * (poly[j].x - poly[i].x))) < x);
                 }
 
                 j = i;

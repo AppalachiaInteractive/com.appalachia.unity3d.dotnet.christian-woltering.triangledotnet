@@ -491,7 +491,7 @@ namespace TriangleNet.Meshing.Algorithm
             Otri tri3 = default(Otri);
             Otri innerleft = default(Otri), innerright = default(Otri);
             double area;
-            int vertices = right - left + 1;
+            int vertices = (right - left) + 1;
             int divider;
 
             if (vertices == 2)
@@ -623,8 +623,8 @@ namespace TriangleNet.Meshing.Algorithm
                 divider = vertices >> 1;
 
                 // Recursively triangulate each half.
-                DivconqRecurse(left, left + divider - 1, 1 - axis, ref farleft, ref innerleft);
-                DivconqRecurse(left + divider, right, 1 - axis, ref innerright, ref farright);
+                DivconqRecurse(left,           (left + divider) - 1, 1 - axis, ref farleft,    ref innerleft);
+                DivconqRecurse(left + divider, right,                1 - axis, ref innerright, ref farright);
 
                 // Merge the two triangulations into one.
                 MergeHulls(ref farleft, ref innerleft, ref innerright, ref farright, axis);

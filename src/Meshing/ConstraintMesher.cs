@@ -690,19 +690,19 @@ namespace TriangleNet.Meshing
             ey = endpoint2.y - endpoint1.y;
             etx = torg.x - endpoint2.x;
             ety = torg.y - endpoint2.y;
-            denom = ty * ex - tx * ey;
+            denom = (ty * ex) - (tx * ey);
             if (denom == 0.0)
             {
                 logger.Error("Attempt to find intersection of parallel segments.",
                     "Mesh.SegmentIntersection()");
                 throw new Exception("Attempt to find intersection of parallel segments.");
             }
-            split = (ey * etx - ex * ety) / denom;
+            split = ((ey * etx) - (ex * ety)) / denom;
 
             // Create the new vertex.
             newvertex = new Vertex(
-                torg.x + split * (tdest.x - torg.x),
-                torg.y + split * (tdest.y - torg.y),
+                torg.x + (split * (tdest.x - torg.x)),
+                torg.y + (split * (tdest.y - torg.y)),
                 splitsubseg.seg.boundary
 #if USE_ATTRIBS
                 , mesh.nextras
@@ -720,7 +720,7 @@ namespace TriangleNet.Meshing
             }
 #endif
 
-            newvertex.z = torg.z + split * (tdest.z - torg.z);
+            newvertex.z = torg.z + (split * (tdest.z - torg.z));
 
 
             mesh.vertices.Add(newvertex.hash, newvertex);

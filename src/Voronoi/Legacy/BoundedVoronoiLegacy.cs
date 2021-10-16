@@ -99,7 +99,7 @@ namespace TriangleNet.Voronoi.Legacy
             foreach (var v in mesh.vertices.Values)
             {
                 // TODO: Need a reliable way to check if a vertex is on a segment
-                if (v.type == VertexType.FreeVertex || v.label == 0)
+                if ((v.type == VertexType.FreeVertex) || (v.label == 0))
                 {
                     ConstructCell(v);
                 }
@@ -179,7 +179,7 @@ namespace TriangleNet.Voronoi.Legacy
                 e.orient = 0;
                 e.Pivot(ref f);
 
-                if (f.tri.id != Mesh.DUMMY && !f.tri.infected)
+                if ((f.tri.id != Mesh.DUMMY) && !f.tri.infected)
                 {
                     triangles.Push(f.tri);
                 }
@@ -187,7 +187,7 @@ namespace TriangleNet.Voronoi.Legacy
                 e.Sym();
                 e.Pivot(ref f);
 
-                if (f.tri.id != Mesh.DUMMY && !f.tri.infected)
+                if ((f.tri.id != Mesh.DUMMY) && !f.tri.infected)
                 {
                     triangles.Push(f.tri);
                 }
@@ -218,7 +218,7 @@ namespace TriangleNet.Voronoi.Legacy
 
                             // if f0 is finite and tagged non-blind & the common edge 
                             // between f and f0 is unconstrained then
-                            if (f0.tri.id != Mesh.DUMMY && !f0.tri.infected && sub1.seg.hash == Mesh.DUMMY)
+                            if ((f0.tri.id != Mesh.DUMMY) && !f0.tri.infected && (sub1.seg.hash == Mesh.DUMMY))
                             {
                                 // Push f0 into triangles.
                                 triangles.Push(f0.tri);
@@ -418,7 +418,7 @@ namespace TriangleNet.Voronoi.Legacy
             if (f_prev.tri.id != Mesh.DUMMY)
             {
                 // Go clockwise until we reach the border (or the initial triangle)
-                while (f_prev.tri.id != Mesh.DUMMY && !f_prev.Equals(f_init))
+                while ((f_prev.tri.id != Mesh.DUMMY) && !f_prev.Equals(f_init))
                 {
                     f_prev.Copy(ref f);
                     f_prev.Oprev();
@@ -612,11 +612,11 @@ namespace TriangleNet.Voronoi.Legacy
             double distAB, theCos, theSin, newX, ABpos;
 
             //  Fail if either line segment is zero-length.
-            if (Ax == Bx && Ay == By || Cx == Dx && Cy == Dy) return false;
+            if (((Ax == Bx) && (Ay == By)) || ((Cx == Dx) && (Cy == Dy))) return false;
 
             //  Fail if the segments share an end-point.
-            if (Ax == Cx && Ay == Cy || Bx == Cx && By == Cy
-            || Ax == Dx && Ay == Dy || Bx == Dx && By == Dy)
+            if (((Ax == Cx) && (Ay == Cy)) || ((Bx == Cx) && (By == Cy))
+                                           || ((Ax == Dx) && (Ay == Dy)) || ((Bx == Dx) && (By == Dy)))
             {
                 return false;
             }
@@ -627,27 +627,27 @@ namespace TriangleNet.Voronoi.Legacy
             Dx -= Ax; Dy -= Ay;
 
             //  Discover the length of segment A-B.
-            distAB = Math.Sqrt(Bx * Bx + By * By);
+            distAB = Math.Sqrt((Bx * Bx) + (By * By));
 
             //  (2) Rotate the system so that point B is on the positive X axis.
             theCos = Bx / distAB;
             theSin = By / distAB;
-            newX = Cx * theCos + Cy * theSin;
-            Cy = Cy * theCos - Cx * theSin; Cx = newX;
-            newX = Dx * theCos + Dy * theSin;
-            Dy = Dy * theCos - Dx * theSin; Dx = newX;
+            newX = (Cx * theCos) + (Cy * theSin);
+            Cy = (Cy * theCos) - (Cx * theSin); Cx = newX;
+            newX = (Dx * theCos) + (Dy * theSin);
+            Dy = (Dy * theCos) - (Dx * theSin); Dx = newX;
 
             //  Fail if segment C-D doesn't cross line A-B.
-            if (Cy < 0 && Dy < 0 || Cy >= 0 && Dy >= 0 && strictIntersect) return false;
+            if (((Cy < 0) && (Dy < 0)) || ((Cy >= 0) && (Dy >= 0) && strictIntersect)) return false;
 
             //  (3) Discover the position of the intersection point along line A-B.
-            ABpos = Dx + (Cx - Dx) * Dy / (Dy - Cy);
+            ABpos = Dx + (((Cx - Dx) * Dy) / (Dy - Cy));
 
             //  Fail if segment C-D crosses line A-B outside of segment A-B.
-            if (ABpos < 0 || ABpos > distAB && strictIntersect) return false;
+            if ((ABpos < 0) || ((ABpos > distAB) && strictIntersect)) return false;
 
             //  (4) Apply the discovered position to line A-B in the original coordinate system.
-            p = new Point(Ax + ABpos * theCos, Ay + ABpos * theSin);
+            p = new Point(Ax + (ABpos * theCos), Ay + (ABpos * theSin));
 
             //  Success.
             return true;
@@ -680,7 +680,7 @@ namespace TriangleNet.Voronoi.Legacy
                     }
                 }
 
-                if (region.Bounded && first != null)
+                if (region.Bounded && (first != null))
                 {
                     edges.Add(new Edge(last.id, first.id));
                 }

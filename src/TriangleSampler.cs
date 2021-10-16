@@ -28,7 +28,7 @@ namespace TriangleNet
         private int samples = 1;
 
         // Number of triangles in mesh.
-        private int triangleCount = 0;
+        private int triangleCount;
 
         public TriangleSampler(Mesh mesh)
             : this(mesh, new Random(RANDOM_SEED))
@@ -65,7 +65,7 @@ namespace TriangleNet
                 // of the number of triangles in the mesh.  The next bit of code assumes
                 // that the number of triangles increases monotonically (or at least
                 // doesn't decrease enough to matter).
-                while (samplefactor * samples * samples * samples < count)
+                while ((samplefactor * samples * samples * samples) < count)
                 {
                     samples++;
                 }

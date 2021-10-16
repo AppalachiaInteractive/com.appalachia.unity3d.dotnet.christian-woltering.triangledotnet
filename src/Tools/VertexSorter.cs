@@ -52,7 +52,7 @@ namespace TriangleNet.Tools
             int divider = length >> 1;
 
             // Re-sort the array of vertices to accommodate alternating cuts.
-            if (length - divider >= 2)
+            if ((length - divider) >= 2)
             {
                 if (divider >= 2)
                 {
@@ -78,7 +78,7 @@ namespace TriangleNet.Tools
         {
             int oleft = left;
             int oright = right;
-            int arraysize = right - left + 1;
+            int arraysize = (right - left) + 1;
             int pivot;
             double pivotx, pivoty;
             Vertex temp;
@@ -92,7 +92,7 @@ namespace TriangleNet.Tools
                 {
                     var a = array[i];
                     int j = i - 1;
-                    while (j >= left && (array[j].x > a.x || (array[j].x == a.x && array[j].y > a.y)))
+                    while ((j >= left) && ((array[j].x > a.x) || ((array[j].x == a.x) && (array[j].y > a.y))))
                     {
                         array[j + 1] = array[j];
                         j--;
@@ -143,7 +143,7 @@ namespace TriangleNet.Tools
                 QuickSort(oleft, left);
             }
 
-            if (oright > right + 1)
+            if (oright > (right + 1))
             {
                 // Recursively sort the right subset.
                 QuickSort(right + 1, oright);
@@ -168,7 +168,7 @@ namespace TriangleNet.Tools
         /// </remarks>
         private void AlternateAxes(int left, int right, int axis)
         {
-            int size = right - left + 1;
+            int size = (right - left) + 1;
             int divider = size >> 1;
 
             if (size <= 3)
@@ -189,11 +189,11 @@ namespace TriangleNet.Tools
             }
 
             // Recursively partition the subsets with a cross cut.
-            if (size - divider >= 2)
+            if ((size - divider) >= 2)
             {
                 if (divider >= 2)
                 {
-                    AlternateAxes(left, left + divider - 1, 1 - axis);
+                    AlternateAxes(left, (left + divider) - 1, 1 - axis);
                 }
 
                 AlternateAxes(left + divider, right, 1 - axis);
@@ -213,7 +213,7 @@ namespace TriangleNet.Tools
         /// </remarks>
         private void VertexMedianX(int left, int right, int median)
         {
-            int arraysize = right - left + 1;
+            int arraysize = (right - left) + 1;
             int oleft = left, oright = right;
             int pivot;
             double pivot1, pivot2;
@@ -276,7 +276,7 @@ namespace TriangleNet.Tools
                 VertexMedianX(oleft, left - 1, median);
             }
 
-            if (right < median - 1)
+            if (right < (median - 1))
             {
                 // Recursively shuffle the right subset.
                 VertexMedianX(right + 1, oright, median);
@@ -296,7 +296,7 @@ namespace TriangleNet.Tools
         /// </remarks>
         private void VertexMedianY(int left, int right, int median)
         {
-            int arraysize = right - left + 1;
+            int arraysize = (right - left) + 1;
             int oleft = left, oright = right;
             int pivot;
             double pivot1, pivot2;
@@ -359,7 +359,7 @@ namespace TriangleNet.Tools
                 VertexMedianY(oleft, left - 1, median);
             }
 
-            if (right < median - 1)
+            if (right < (median - 1))
             {
                 // Recursively shuffle the right subset.
                 VertexMedianY(right + 1, oright, median);

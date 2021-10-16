@@ -59,50 +59,50 @@ namespace TriangleNet.Tools
 
         #region Properties
 
-        double minEdge = 0;
+        double minEdge;
         /// <summary>
         /// Gets the shortest edge.
         /// </summary>
         public double ShortestEdge { get { return minEdge; } }
 
-        double maxEdge = 0;
+        double maxEdge;
         /// <summary>
         /// Gets the longest edge.
         /// </summary>
         public double LongestEdge { get { return maxEdge; } }
 
         //
-        double minAspect = 0;
+        double minAspect;
         /// <summary>
         /// Gets the shortest altitude.
         /// </summary>
         public double ShortestAltitude { get { return minAspect; } }
 
-        double maxAspect = 0;
+        double maxAspect;
         /// <summary>
         /// Gets the largest aspect ratio.
         /// </summary>
         public double LargestAspectRatio { get { return maxAspect; } }
 
-        double minArea = 0;
+        double minArea;
         /// <summary>
         /// Gets the smallest area.
         /// </summary>
         public double SmallestArea { get { return minArea; } }
 
-        double maxArea = 0;
+        double maxArea;
         /// <summary>
         /// Gets the largest area.
         /// </summary>
         public double LargestArea { get { return maxArea; } }
 
-        double minAngle = 0;
+        double minAngle;
         /// <summary>
         /// Gets the smallest angle.
         /// </summary>
         public double SmallestAngle { get { return minAngle; } }
 
-        double maxAngle = 0;
+        double maxAngle;
         /// <summary>
         /// Gets the largest angle.
         /// </summary>
@@ -168,7 +168,7 @@ namespace TriangleNet.Tools
                     k = minus1Mod3[i];
                     dx[i] = p[j].x - p[k].x;
                     dy[i] = p[j].y - p[k].y;
-                    edgelength[i] = dx[i] * dx[i] + dy[i] * dy[i];
+                    edgelength[i] = (dx[i] * dx[i]) + (dy[i] * dy[i]);
                     if (edgelength[i] > trilongest2)
                     {
                         trilongest2 = edgelength[i];
@@ -176,15 +176,15 @@ namespace TriangleNet.Tools
                 }
 
                 //triarea = Primitives.CounterClockwise(p[0], p[1], p[2]);
-                triarea = Math.Abs((p[2].x - p[0].x) * (p[1].y - p[0].y) -
-                    (p[1].x - p[0].x) * (p[2].y - p[0].y)) / 2.0;
+                triarea = Math.Abs(((p[2].x - p[0].x) * (p[1].y - p[0].y)) -
+                    ((p[1].x - p[0].x) * (p[2].y - p[0].y))) / 2.0;
 
-                triminaltitude2 = triarea * triarea / trilongest2;
+                triminaltitude2 = (triarea * triarea) / trilongest2;
 
                 triaspect2 = trilongest2 / triminaltitude2;
 
                 aspectindex = 0;
-                while ((triaspect2 > ratiotable[aspectindex] * ratiotable[aspectindex]) && (aspectindex < 15))
+                while ((triaspect2 > (ratiotable[aspectindex] * ratiotable[aspectindex])) && (aspectindex < 15))
                 {
                     aspectindex++;
                 }
@@ -212,7 +212,7 @@ namespace TriangleNet.Tools
             //sampleDegrees = 45; // sample every 4 degrees
             sampleDegrees = 60; // sample every 3 degrees
 
-            double[] cosSquareTable = new double[sampleDegrees / 2 - 1];
+            double[] cosSquareTable = new double[(sampleDegrees / 2) - 1];
             double[] dx = new double[3];
             double[] dy = new double[3];
             double[] edgeLength = new double[3];
@@ -231,7 +231,7 @@ namespace TriangleNet.Tools
             minAngles = new int[sampleDegrees];
             maxAngles = new int[sampleDegrees];
 
-            for (int i = 0; i < sampleDegrees / 2 - 1; i++)
+            for (int i = 0; i < ((sampleDegrees / 2) - 1); i++)
             {
                 cosSquareTable[i] = Math.Cos(radconst * (i + 1));
                 cosSquareTable[i] = cosSquareTable[i] * cosSquareTable[i];
@@ -275,7 +275,7 @@ namespace TriangleNet.Tools
                     dx[i] = p[k1].x - p[k2].x;
                     dy[i] = p[k1].y - p[k2].y;
 
-                    edgeLength[i] = dx[i] * dx[i] + dy[i] * dy[i];
+                    edgeLength[i] = (dx[i] * dx[i]) + (dy[i] * dy[i]);
 
                     if (edgeLength[i] > triLongest2)
                     {
@@ -294,8 +294,8 @@ namespace TriangleNet.Tools
                 }
 
                 //triarea = Primitives.CounterClockwise(p[0], p[1], p[2]);
-                triArea = Math.Abs((p[2].x - p[0].x) * (p[1].y - p[0].y) -
-                    (p[1].x - p[0].x) * (p[2].y - p[0].y));
+                triArea = Math.Abs(((p[2].x - p[0].x) * (p[1].y - p[0].y)) -
+                    ((p[1].x - p[0].x) * (p[2].y - p[0].y)));
 
                 if (triArea < minArea)
                 {
@@ -307,7 +307,7 @@ namespace TriangleNet.Tools
                     maxArea = triArea;
                 }
 
-                triMinAltitude2 = triArea * triArea / triLongest2;
+                triMinAltitude2 = (triArea * triArea) / triLongest2;
                 if (triMinAltitude2 < minAspect)
                 {
                     minAspect = triMinAltitude2;
@@ -324,9 +324,9 @@ namespace TriangleNet.Tools
                     k1 = plus1Mod3[i];
                     k2 = minus1Mod3[i];
 
-                    dotProduct = dx[k1] * dx[k2] + dy[k1] * dy[k2];
-                    cosSquare = dotProduct * dotProduct / (edgeLength[k1] * edgeLength[k2]);
-                    degreeStep = sampleDegrees / 2 - 1;
+                    dotProduct = (dx[k1] * dx[k2]) + (dy[k1] * dy[k2]);
+                    cosSquare = (dotProduct * dotProduct) / (edgeLength[k1] * edgeLength[k2]);
+                    degreeStep = (sampleDegrees / 2) - 1;
 
                     for (int j = degreeStep - 1; j >= 0; j--)
                     {
@@ -377,7 +377,7 @@ namespace TriangleNet.Tools
                 }
 
                 // Update min angle histogram
-                degreeStep = sampleDegrees / 2 - 1;
+                degreeStep = (sampleDegrees / 2) - 1;
 
                 for (int j = degreeStep - 1; j >= 0; j--)
                 {
@@ -389,7 +389,7 @@ namespace TriangleNet.Tools
                 minAngles[degreeStep]++;
 
                 // Update max angle histogram
-                degreeStep = sampleDegrees / 2 - 1;
+                degreeStep = (sampleDegrees / 2) - 1;
 
                 for (int j = degreeStep - 1; j >= 0; j--)
                 {
@@ -438,7 +438,7 @@ namespace TriangleNet.Tools
                 }
                 else
                 {
-                    maxAngle = 180.0 - degconst * Math.Acos(Math.Sqrt(maxAngle));
+                    maxAngle = 180.0 - (degconst * Math.Acos(Math.Sqrt(maxAngle)));
                 }
             }
         }

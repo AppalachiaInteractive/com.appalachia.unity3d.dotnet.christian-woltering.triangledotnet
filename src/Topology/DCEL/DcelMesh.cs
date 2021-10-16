@@ -139,7 +139,7 @@ namespace TriangleNet.Topology.DCEL
                     return false;
                 }
 
-                if (closed && edge.next == null)
+                if (closed && (edge.next == null))
                 {
                     return false;
                 }
@@ -175,7 +175,7 @@ namespace TriangleNet.Topology.DCEL
                 }
             }
 
-            if (closed && depth > 0)
+            if (closed && (depth > 0))
             {
                 // Check if faces are closed.
                 foreach (var face in faces)
@@ -191,7 +191,7 @@ namespace TriangleNet.Topology.DCEL
                     int id = edge.id;
                     int k = 0;
 
-                    while (next.id != id && k < depth)
+                    while ((next.id != id) && (k < depth))
                     {
                         next = next.next;
                         k++;

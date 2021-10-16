@@ -196,7 +196,7 @@ namespace TriangleNet.Tools
                 for (i = lbegin; i <= lvlend; i++)
                 {
                     // For each node in the current level...
-                    node = perm[offset + i - 1];
+                    node = perm[(offset + i) - 1];
                     jstrt = pcol[node];
                     jstop = pcol[node + 1] - 1;
 
@@ -214,7 +214,7 @@ namespace TriangleNet.Tools
                         {
                             lnbr += 1;
                             mask[nbr] = 0;
-                            perm[offset + lnbr - 1] = nbr;
+                            perm[(offset + lnbr) - 1] = nbr;
                         }
                     }
 
@@ -229,11 +229,11 @@ namespace TriangleNet.Tools
                         {
                             l = k;
                             k = k + 1;
-                            nbr = perm[offset + k - 1];
+                            nbr = perm[(offset + k) - 1];
 
                             while (fnbr < l)
                             {
-                                lperm = perm[offset + l - 1];
+                                lperm = perm[(offset + l) - 1];
 
                                 if (deg[lperm - 1] <= deg[nbr - 1])
                                 {
@@ -337,7 +337,7 @@ namespace TriangleNet.Tools
             // or
             //   A "line graph" 0--0--0--0--0 has every node in its only level.
             //   By chance, we've stumbled on the ideal root.
-            if (level_num == 1 || level_num == iccsze)
+            if ((level_num == 1) || (level_num == iccsze))
             {
                 return;
             }
@@ -349,13 +349,13 @@ namespace TriangleNet.Tools
                 mindeg = iccsze;
 
                 jstrt = level_row[level_num - 1];
-                root = level[offset + jstrt - 1];
+                root = level[(offset + jstrt) - 1];
 
                 if (jstrt < iccsze)
                 {
                     for (j = jstrt; j <= iccsze; j++)
                     {
-                        node = level[offset + j - 1];
+                        node = level[(offset + j) - 1];
                         ndeg = 0;
                         kstrt = pcol[node - 1];
                         kstop = pcol[node] - 1;
@@ -455,7 +455,7 @@ namespace TriangleNet.Tools
                 // in the current level.
                 for (i = lbegin; i <= lvlend; i++)
                 {
-                    node = level[offset + i - 1];
+                    node = level[(offset + i) - 1];
                     jstrt = pcol[node];
                     jstop = pcol[node + 1] - 1;
 
@@ -466,7 +466,7 @@ namespace TriangleNet.Tools
                         if (mask[nbr] != 0)
                         {
                             iccsze += 1;
-                            level[offset + iccsze - 1] = nbr;
+                            level[(offset + iccsze) - 1] = nbr;
                             mask[nbr] = 0;
                         }
                     }
@@ -541,7 +541,7 @@ namespace TriangleNet.Tools
                 // and at the same time, generate the next level.
                 for (i = lbegin; i <= lvlend; i++)
                 {
-                    node = ls[offset + i - 1];
+                    node = ls[(offset + i) - 1];
                     jstrt = -pcol[node];
                     jstop = Math.Abs(pcol[node + 1]) - 1;
                     ideg = 0;
@@ -558,7 +558,7 @@ namespace TriangleNet.Tools
                             {
                                 pcol[nbr] = -pcol[nbr]; // EDIT: [nbr - 1]
                                 iccsze = iccsze + 1;
-                                ls[offset + iccsze - 1] = nbr;
+                                ls[(offset + iccsze) - 1] = nbr;
                             }
                         }
                     }
@@ -656,11 +656,11 @@ namespace TriangleNet.Tools
             int i;
             int j;
 
-            for (i = 0; i < size / 2; i++)
+            for (i = 0; i < (size / 2); i++)
             {
                 j = a[offset + i];
-                a[offset + i] = a[offset + size - 1 - i];
-                a[offset + size - 1 - i] = j;
+                a[offset + i] = a[(offset + size) - 1 - i];
+                a[(offset + size) - 1 - i] = j;
             }
 
             return;

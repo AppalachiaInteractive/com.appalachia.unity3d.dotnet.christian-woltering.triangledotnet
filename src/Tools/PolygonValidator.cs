@@ -142,16 +142,16 @@ namespace TriangleNet.Tools
                 p0 = seg.GetVertex(0); // Current segment start point.
                 p1 = seg.GetVertex(1); // Current segment end point.
 
-                if (p0 == p1 || q0 == q1)
+                if ((p0 == p1) || (q0 == q1))
                 {
                     // Ignore zero-length segments.
                     continue;
                 }
 
-                if (q0 != null && q1 != null)
+                if ((q0 != null) && (q1 != null))
                 {
                     // The two segments are connected.
-                    if (p0 == q1 && p1 != null)
+                    if ((p0 == q1) && (p1 != null))
                     {
                         if (IsBadAngle(q0, p0, p1,threshold))
                         {
@@ -180,14 +180,14 @@ namespace TriangleNet.Tools
         private static double DotProduct(Point a, Point b, Point c)
         {
             //  Calculate the dot product.
-            return (a.x - b.x) * (c.x - b.x) + (a.y - b.y) * (c.y - b.y);
+            return ((a.x - b.x) * (c.x - b.x)) + ((a.y - b.y) * (c.y - b.y));
         }
 
         //  Returns the length of cross product AB x BC.
         private static double CrossProductLength(Point a, Point b, Point c)
         {
             //  Calculate the Z coordinate of the cross product.
-            return (a.x - b.x) * (c.y - b.y) - (a.y - b.y) * (c.x - b.x);
+            return ((a.x - b.x) * (c.y - b.y)) - ((a.y - b.y) * (c.x - b.x));
         }
 
         private static int CheckVertexIDs(IPolygon poly, int count)
@@ -205,14 +205,14 @@ namespace TriangleNet.Tools
                 p = seg.GetVertex(0);
                 q = seg.GetVertex(1);
 
-                if (p.id < 0 || p.id >= count)
+                if ((p.id < 0) || (p.id >= count))
                 {
                     horrors++;
                     logger.Warning(String.Format("Segment {0} has invalid startpoint.", i),
                         "PolygonValidator.IsConsistent()");
                 }
 
-                if (q.id < 0 || q.id >= count)
+                if ((q.id < 0) || (q.id >= count))
                 {
                     horrors++;
                     logger.Warning(String.Format("Segment {0} has invalid endpoint.", i),

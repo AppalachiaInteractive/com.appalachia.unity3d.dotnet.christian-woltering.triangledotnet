@@ -31,12 +31,12 @@ namespace TriangleNet.Tools
             double wx = p0.x - q0.x;
             double wy = p0.y - q0.y;
 
-            double d = (ux * vy - uy * vx);
-            double s = (vx * wy - vy * wx) / d;
+            double d = ((ux * vy) - (uy * vx));
+            double s = ((vx * wy) - (vy * wx)) / d;
 
             // Intersection point
-            c0.x = p0.X + s * ux;
-            c0.y = p0.Y + s * uy;
+            c0.x = p0.X + (s * ux);
+            c0.y = p0.Y + (s * uy);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace TriangleNet.Tools
                 if (edge == 2) { p = -dy; q = -(ymin - y0); }
                 if (edge == 3) { p = dy; q = (ymax - y0); }
                 r = q / p;
-                if (p == 0 && q < 0) return false; // Don't draw line at all. (parallel line outside)
+                if ((p == 0) && (q < 0)) return false; // Don't draw line at all. (parallel line outside)
                 if (p < 0)
                 {
                     if (r > t1) return false; // Don't draw line at all.
@@ -95,10 +95,10 @@ namespace TriangleNet.Tools
                 }
             }
 
-            c0.X = x0 + t0 * dx;
-            c0.Y = y0 + t0 * dy;
-            c1.X = x0 + t1 * dx;
-            c1.Y = y0 + t1 * dy;
+            c0.X = x0 + (t0 * dx);
+            c0.Y = y0 + (t0 * dy);
+            c1.X = x0 + (t1 * dx);
+            c1.Y = y0 + (t1 * dy);
 
             return true; // (clipped) line is drawn
         }
@@ -128,7 +128,7 @@ namespace TriangleNet.Tools
             double ymax = rect.Top;
 
             // Check if point is inside the bounds
-            if (x < xmin || x > xmax || y < ymin || y > ymax)
+            if ((x < xmin) || (x > xmax) || (y < ymin) || (y > ymax))
             {
                 return false;
             }
@@ -139,14 +139,14 @@ namespace TriangleNet.Tools
                 // Line going to the left: intersect with x = minX
                 t1 = (xmin - x) / dx;
                 x1 = xmin;
-                y1 = y + t1 * dy;
+                y1 = y + (t1 * dy);
             }
             else if (dx > 0)
             {
                 // Line going to the right: intersect with x = maxX
                 t1 = (xmax - x) / dx;
                 x1 = xmax;
-                y1 = y + t1 * dy;
+                y1 = y + (t1 * dy);
             }
             else
             {
@@ -160,14 +160,14 @@ namespace TriangleNet.Tools
             {
                 // Line going downwards: intersect with y = minY
                 t2 = (ymin - y) / dy;
-                x2 = x + t2 * dx;
+                x2 = x + (t2 * dx);
                 y2 = ymin;
             }
             else if (dy > 0)
             {
                 // Line going upwards: intersect with y = maxY
                 t2 = (ymax - y) / dy;
-                x2 = x + t2 * dx;
+                x2 = x + (t2 * dx);
                 y2 = ymax;
             }
             else

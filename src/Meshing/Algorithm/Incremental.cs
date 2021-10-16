@@ -79,9 +79,9 @@ namespace TriangleNet.Meshing.Algorithm
                 width = 1.0;
             }
             // Create the vertices of the bounding box.
-            mesh.infvertex1 = new Vertex(box.Left - 50.0 * width, box.Bottom - 40.0 * width);
-            mesh.infvertex2 = new Vertex(box.Right + 50.0 * width, box.Bottom - 40.0 * width);
-            mesh.infvertex3 = new Vertex(0.5 * (box.Left + box.Right), box.Top + 60.0 * width);
+            mesh.infvertex1 = new Vertex(box.Left - (50.0 * width),    box.Bottom - (40.0 * width));
+            mesh.infvertex2 = new Vertex(box.Right + (50.0 * width),   box.Bottom - (40.0 * width));
+            mesh.infvertex3 = new Vertex(0.5 * (box.Left + box.Right), box.Top + (60.0 * width));
 
             // Create the bounding box.
             mesh.MakeTriangle(ref inftri);

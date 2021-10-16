@@ -1,7 +1,6 @@
 ﻿
 namespace TriangleNet.Geometry
 {
-    using System;
     using TriangleNet.Meshing;
 
     public static class ExtensionMethods
@@ -108,7 +107,7 @@ namespace TriangleNet.Geometry
             double s = DotProduct(d2, c1) / DotProduct(d0, c1);
             double v = DotProduct(d2, c0) / DotProduct(d1, c0);
 
-            if (s >= 0 && v >= 0 && ((s + v) <= 1))
+            if ((s >= 0) && (v >= 0) && ((s + v) <= 1))
             {
                 // Point is inside or on the edge of this triangle.
                 return true;
@@ -135,7 +134,7 @@ namespace TriangleNet.Geometry
 
         public static double DotProduct(Point p, Point q)
         {
-            return p.X * q.X + p.Y * q.Y;
+            return (p.X * q.X) + (p.Y * q.Y);
         }
 
         #endregion

@@ -94,7 +94,7 @@ namespace TriangleNet.Meshing
                 mesh.checksegments = true;
             }
 
-            if (behavior.Quality && mesh.triangles.Count > 0)
+            if (behavior.Quality && (mesh.triangles.Count > 0))
             {
                 // Enforce angle and area constraints.
                 EnforceQuality();
@@ -160,17 +160,17 @@ namespace TriangleNet.Meshing
                 // of two sides of the triangle is used to check whether the angle
                 // at the apex is greater than (180 - 2 'minangle') degrees (for
                 // lenses; 90 degrees for diametral circles).
-                dotproduct = (eorg.x - eapex.x) * (edest.x - eapex.x) +
-                             (eorg.y - eapex.y) * (edest.y - eapex.y);
+                dotproduct = ((eorg.x - eapex.x) * (edest.x - eapex.x)) +
+                             ((eorg.y - eapex.y) * (edest.y - eapex.y));
                 if (dotproduct < 0.0)
                 {
                     if (behavior.ConformingDelaunay ||
-                        (dotproduct * dotproduct >=
-                         (2.0 * behavior.goodAngle - 1.0) * (2.0 * behavior.goodAngle - 1.0) *
-                         ((eorg.x - eapex.x) * (eorg.x - eapex.x) +
-                          (eorg.y - eapex.y) * (eorg.y - eapex.y)) *
-                         ((edest.x - eapex.x) * (edest.x - eapex.x) +
-                          (edest.y - eapex.y) * (edest.y - eapex.y))))
+                        ((dotproduct * dotproduct) >=
+                         (((2.0 * behavior.goodAngle) - 1.0) * ((2.0 * behavior.goodAngle) - 1.0) *
+                          (((eorg.x - eapex.x) * (eorg.x - eapex.x)) +
+                           ((eorg.y - eapex.y) * (eorg.y - eapex.y))) *
+                          (((edest.x - eapex.x) * (edest.x - eapex.x)) +
+                           ((edest.y - eapex.y) * (edest.y - eapex.y))))))
                     {
                         encroached = 1;
                     }
@@ -187,24 +187,24 @@ namespace TriangleNet.Meshing
                 eapex = neighbortri.Apex();
                 // Check whether the apex is in the diametral lens of the subsegment
                 // (or the diametral circle, if 'conformdel' is set).
-                dotproduct = (eorg.x - eapex.x) * (edest.x - eapex.x) +
-                             (eorg.y - eapex.y) * (edest.y - eapex.y);
+                dotproduct = ((eorg.x - eapex.x) * (edest.x - eapex.x)) +
+                             ((eorg.y - eapex.y) * (edest.y - eapex.y));
                 if (dotproduct < 0.0)
                 {
                     if (behavior.ConformingDelaunay ||
-                        (dotproduct * dotproduct >=
-                         (2.0 * behavior.goodAngle - 1.0) * (2.0 * behavior.goodAngle - 1.0) *
-                         ((eorg.x - eapex.x) * (eorg.x - eapex.x) +
-                          (eorg.y - eapex.y) * (eorg.y - eapex.y)) *
-                         ((edest.x - eapex.x) * (edest.x - eapex.x) +
-                          (edest.y - eapex.y) * (edest.y - eapex.y))))
+                        ((dotproduct * dotproduct) >=
+                         (((2.0 * behavior.goodAngle) - 1.0) * ((2.0 * behavior.goodAngle) - 1.0) *
+                          (((eorg.x - eapex.x) * (eorg.x - eapex.x)) +
+                           ((eorg.y - eapex.y) * (eorg.y - eapex.y))) *
+                          (((edest.x - eapex.x) * (edest.x - eapex.x)) +
+                           ((edest.y - eapex.y) * (edest.y - eapex.y))))))
                     {
                         encroached += 2;
                     }
                 }
             }
 
-            if (encroached > 0 && (behavior.NoBisect == 0 || ((behavior.NoBisect == 1) && (sides == 2))))
+            if ((encroached > 0) && ((behavior.NoBisect == 0) || ((behavior.NoBisect == 1) && (sides == 2))))
             {
                 // Add the subsegment to the list of encroached subsegments.
                 // Be sure to get the orientation right.
@@ -279,8 +279,8 @@ namespace TriangleNet.Meshing
                 // The edge opposite the apex is shortest.
                 minedge = apexlen;
                 // Find the square of the cosine of the angle at the apex.
-                angle = dxda * dxao + dyda * dyao;
-                angle = angle * angle / (orglen * destlen);
+                angle = (dxda * dxao) + (dyda * dyao);
+                angle = (angle * angle) / (orglen * destlen);
                 base1 = torg;
                 base2 = tdest;
                 testtri.Copy(ref tri1);
@@ -290,8 +290,8 @@ namespace TriangleNet.Meshing
                 // The edge opposite the origin is shortest.
                 minedge = orglen;
                 // Find the square of the cosine of the angle at the origin.
-                angle = dxod * dxao + dyod * dyao;
-                angle = angle * angle / (apexlen * destlen);
+                angle = (dxod * dxao) + (dyod * dyao);
+                angle = (angle * angle) / (apexlen * destlen);
                 base1 = tdest;
                 base2 = tapex;
                 testtri.Lnext(ref tri1);
@@ -301,8 +301,8 @@ namespace TriangleNet.Meshing
                 // The edge opposite the destination is shortest.
                 minedge = destlen;
                 // Find the square of the cosine of the angle at the destination.
-                angle = dxod * dxda + dyod * dyda;
-                angle = angle * angle / (apexlen * orglen);
+                angle = (dxod * dxda) + (dyod * dyda);
+                angle = (angle * angle) / (apexlen * orglen);
                 base1 = tapex;
                 base2 = torg;
                 testtri.Lprev(ref tri1);
@@ -311,7 +311,7 @@ namespace TriangleNet.Meshing
             if (behavior.VarArea || behavior.fixedArea || (behavior.UserTest != null))
             {
                 // Check whether the area is larger than permitted.
-                area = 0.5 * (dxod * dyda - dyod * dxda);
+                area = 0.5 * ((dxod * dyda) - (dyod * dxda));
                 if (behavior.fixedArea && (area > behavior.MaxArea))
                 {
                     // Add this triangle to the list of bad triangles.
@@ -341,25 +341,25 @@ namespace TriangleNet.Meshing
                 // The edge opposite the apex is longest.
                 // maxedge = apexlen;
                 // Find the cosine of the angle at the apex.
-                maxangle = (orglen + destlen - apexlen) / (2 * Math.Sqrt(orglen * destlen));
+                maxangle = ((orglen + destlen) - apexlen) / (2 * Math.Sqrt(orglen * destlen));
             }
             else if (orglen > destlen)
             {
                 // The edge opposite the origin is longest.
                 // maxedge = orglen;
                 // Find the cosine of the angle at the origin.
-                maxangle = (apexlen + destlen - orglen) / (2 * Math.Sqrt(apexlen * destlen));
+                maxangle = ((apexlen + destlen) - orglen) / (2 * Math.Sqrt(apexlen * destlen));
             }
             else
             {
                 // The edge opposite the destination is longest.
                 // maxedge = destlen;
                 // Find the cosine of the angle at the destination.
-                maxangle = (apexlen + orglen - destlen) / (2 * Math.Sqrt(apexlen * orglen));
+                maxangle = ((apexlen + orglen) - destlen) / (2 * Math.Sqrt(apexlen * orglen));
             }
 
             // Check whether the angle is smaller than permitted.
-            if ((angle > behavior.goodAngle) || (maxangle < behavior.maxGoodAngle && behavior.MaxAngle != 0.0))
+            if ((angle > behavior.goodAngle) || ((maxangle < behavior.maxGoodAngle) && (behavior.MaxAngle != 0.0)))
             {
                 // Use the rules of Miller, Pav, and Walkington to decide that certain
                 // triangles should not be split, even if they have bad angles.
@@ -411,12 +411,12 @@ namespace TriangleNet.Meshing
                         {
                             // Compute the distance from the common endpoint (of the two
                             // segments) to each of the endpoints of the shortest edge.
-                            dist1 = ((base1.x - joinvertex.x) * (base1.x - joinvertex.x) +
-                                     (base1.y - joinvertex.y) * (base1.y - joinvertex.y));
-                            dist2 = ((base2.x - joinvertex.x) * (base2.x - joinvertex.x) +
-                                     (base2.y - joinvertex.y) * (base2.y - joinvertex.y));
+                            dist1 = (((base1.x - joinvertex.x) * (base1.x - joinvertex.x)) +
+                                     ((base1.y - joinvertex.y) * (base1.y - joinvertex.y)));
+                            dist2 = (((base2.x - joinvertex.x) * (base2.x - joinvertex.x)) +
+                                     ((base2.y - joinvertex.y) * (base2.y - joinvertex.y)));
                             // If the two distances are equal, don't split the triangle.
-                            if ((dist1 < 1.001 * dist2) && (dist1 > 0.999 * dist2))
+                            if ((dist1 < (1.001 * dist2)) && (dist1 > (0.999 * dist2)))
                             {
                                 // Return now to avoid enqueueing the bad triangle.
                                 return;
@@ -529,8 +529,8 @@ namespace TriangleNet.Meshing
                     {
                         eapex = enctri.Apex();
                         while ((eapex.type == VertexType.FreeVertex) &&
-                               ((eorg.x - eapex.x) * (edest.x - eapex.x) +
-                                (eorg.y - eapex.y) * (edest.y - eapex.y) < 0.0))
+                               ((((eorg.x - eapex.x) * (edest.x - eapex.x)) +
+                                 ((eorg.y - eapex.y) * (edest.y - eapex.y))) < 0.0))
                         {
                             mesh.DeleteVertex(ref testtri);
                             currentenc.Pivot(ref enctri);
@@ -559,8 +559,8 @@ namespace TriangleNet.Meshing
                         {
                             eapex = testtri.Org();
                             while ((eapex.type == VertexType.FreeVertex) &&
-                                   ((eorg.x - eapex.x) * (edest.x - eapex.x) +
-                                    (eorg.y - eapex.y) * (edest.y - eapex.y) < 0.0))
+                                   ((((eorg.x - eapex.x) * (edest.x - eapex.x)) +
+                                     ((eorg.y - eapex.y) * (edest.y - eapex.y))) < 0.0))
                             {
                                 mesh.DeleteVertex(ref testtri);
                                 enctri.Sym(ref testtri);
@@ -574,16 +574,16 @@ namespace TriangleNet.Meshing
                     // with another adjacent segment.
                     if (acuteorg || acutedest)
                     {
-                        segmentlength = Math.Sqrt((edest.x - eorg.x) * (edest.x - eorg.x) +
-                                             (edest.y - eorg.y) * (edest.y - eorg.y));
+                        segmentlength = Math.Sqrt(((edest.x - eorg.x) * (edest.x - eorg.x)) +
+                                             ((edest.y - eorg.y) * (edest.y - eorg.y)));
                         // Find the power of two that most evenly splits the segment.
                         // The worst case is a 2:1 ratio between subsegment lengths.
                         nearestpoweroftwo = 1.0;
-                        while (segmentlength > 3.0 * nearestpoweroftwo)
+                        while (segmentlength > (3.0 * nearestpoweroftwo))
                         {
                             nearestpoweroftwo *= 2.0;
                         }
-                        while (segmentlength < 1.5 * nearestpoweroftwo)
+                        while (segmentlength < (1.5 * nearestpoweroftwo))
                         {
                             nearestpoweroftwo *= 0.5;
                         }
@@ -603,8 +603,8 @@ namespace TriangleNet.Meshing
 
                     // Create the new vertex (interpolate coordinates).
                     newvertex = new Vertex(
-                        eorg.x + split * (edest.x - eorg.x),
-                        eorg.y + split * (edest.y - eorg.y),
+                        eorg.x + (split * (edest.x - eorg.x)),
+                        eorg.y + (split * (edest.y - eorg.y)),
                         currentenc.seg.boundary
 #if USE_ATTRIBS
                         , mesh.nextras
@@ -626,7 +626,7 @@ namespace TriangleNet.Meshing
                     }
 #endif
 
-                    newvertex.z = eorg.z + split * (edest.z - eorg.z);
+                    newvertex.z = eorg.z + (split * (edest.z - eorg.z));
 
                     if (!Behavior.NoExact)
                     {
@@ -634,8 +634,8 @@ namespace TriangleNet.Meshing
                         // that is not precisely collinear with 'eorg' and 'edest'.
                         // Improve collinearity by one step of iterative refinement.
                         multiplier = predicates.CounterClockwise(eorg, edest, newvertex);
-                        divisor = ((eorg.x - edest.x) * (eorg.x - edest.x) +
-                                   (eorg.y - edest.y) * (eorg.y - edest.y));
+                        divisor = (((eorg.x - edest.x) * (eorg.x - edest.x)) +
+                                   ((eorg.y - edest.y) * (eorg.y - edest.y)));
                         if ((multiplier != 0.0) && (divisor != 0.0))
                         {
                             multiplier = multiplier / divisor;
@@ -853,7 +853,7 @@ namespace TriangleNet.Meshing
             // triangulation should be (conforming) Delaunay.
 
             // Next, we worry about enforcing triangle quality.
-            if ((behavior.MinAngle > 0.0) || behavior.VarArea || behavior.fixedArea || behavior.UserTest != null)
+            if ((behavior.MinAngle > 0.0) || behavior.VarArea || behavior.fixedArea || (behavior.UserTest != null))
             {
                 // TODO: Reset queue? (Or is it always empty at this point)
 

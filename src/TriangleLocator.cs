@@ -163,8 +163,8 @@ namespace TriangleNet
                         // a line perpendicular to the line (forg, fdest) and passing
                         // through 'fapex', and determining which side of this line
                         // 'searchpoint' falls on.
-                        moveleft = (fapex.x - searchpoint.x) * (fdest.x - forg.x) +
-                                   (fapex.y - searchpoint.y) * (fdest.y - forg.y) > 0.0;
+                        moveleft = (((fapex.x - searchpoint.x) * (fdest.x - forg.x)) +
+                                    ((fapex.y - searchpoint.y) * (fdest.y - forg.y))) > 0.0;
                     }
                     else
                     {
@@ -280,8 +280,8 @@ namespace TriangleNet
             // Record the distance from the suggested starting triangle to the
             // point we seek.
             torg = searchtri.Org();
-            searchdist = (searchpoint.x - torg.x) * (searchpoint.x - torg.x) +
-                         (searchpoint.y - torg.y) * (searchpoint.y - torg.y);
+            searchdist = ((searchpoint.x - torg.x) * (searchpoint.x - torg.x)) +
+                         ((searchpoint.y - torg.y) * (searchpoint.y - torg.y));
 
             // If a recently encountered triangle has been recorded and has not been
             // deallocated, test it as a good starting point.
@@ -295,8 +295,8 @@ namespace TriangleNet
                         recenttri.Copy(ref searchtri);
                         return LocateResult.OnVertex;
                     }
-                    dist = (searchpoint.x - torg.x) * (searchpoint.x - torg.x) +
-                           (searchpoint.y - torg.y) * (searchpoint.y - torg.y);
+                    dist = ((searchpoint.x - torg.x) * (searchpoint.x - torg.x)) +
+                           ((searchpoint.y - torg.y) * (searchpoint.y - torg.y));
                     if (dist < searchdist)
                     {
                         recenttri.Copy(ref searchtri);
@@ -314,8 +314,8 @@ namespace TriangleNet
                 if (!Otri.IsDead(sampletri.tri))
                 {
                     torg = sampletri.Org();
-                    dist = (searchpoint.x - torg.x) * (searchpoint.x - torg.x) +
-                           (searchpoint.y - torg.y) * (searchpoint.y - torg.y);
+                    dist = ((searchpoint.x - torg.x) * (searchpoint.x - torg.x)) +
+                           ((searchpoint.y - torg.y) * (searchpoint.y - torg.y));
                     if (dist < searchdist)
                     {
                         sampletri.Copy(ref searchtri);

@@ -83,7 +83,7 @@ namespace TriangleNet.Tools
             xao = apex.x - org.x;
             yao = apex.y - org.y;
 
-            denominator = 0.5 / (xdo * yao - xao * ydo);
+            denominator = 0.5 / ((xdo * yao) - (xao * ydo));
 
             //dx = (yao * dodist - ydo * aodist) * denominator;
             //dy = (xdo * aodist - xao * dodist) * denominator;
@@ -95,10 +95,10 @@ namespace TriangleNet.Tools
             // coordinate system with a xi-axis, directed from the triangle's
             // origin to its destination, and an eta-axis, directed from its
             // origin to its apex.
-            xi = (yao * dx - xao * dy) * (2.0 * denominator);
-            eta = (xdo * dy - ydo * dx) * (2.0 * denominator);
+            xi = ((yao * dx) - (xao * dy)) * (2.0 * denominator);
+            eta = ((xdo * dy) - (ydo * dx)) * (2.0 * denominator);
 
-            p.z = org.z + xi * (dest.z - org.z) + eta * (apex.z - org.z);
+            p.z = org.z + (xi * (dest.z - org.z)) + (eta * (apex.z - org.z));
         }
     }
 }

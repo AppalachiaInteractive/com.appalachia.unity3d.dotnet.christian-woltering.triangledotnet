@@ -100,7 +100,7 @@ namespace TriangleNet.Tools
             double s = DotProduct(d2, c1) / DotProduct(d0, c1);
             double v = DotProduct(d2, c0) / DotProduct(d1, c0);
 
-            if (s >= 0 && v >= 0 && ((s + v) <= 1))
+            if ((s >= 0) && (v >= 0) && ((s + v) <= 1))
             {
                 // Point is inside or on the edge of this triangle.
                 return true;
@@ -111,7 +111,7 @@ namespace TriangleNet.Tools
 
         public static double DotProduct(Point p, Point q)
         {
-            return p.x * q.x + p.y * q.y;
+            return (p.x * q.x) + (p.y * q.y);
         }
 
         /// <summary>
@@ -222,7 +222,7 @@ namespace TriangleNet.Tools
 
                 for (int i = 0; i < 4; i++)
                 {
-                    if (regions[i].triangles.Count > tree.sizeBound && currentDepth < tree.maxDepth)
+                    if ((regions[i].triangles.Count > tree.sizeBound) && (currentDepth < tree.maxDepth))
                     {
                         regions[i].CreateSubRegion(currentDepth + 1);
                     }
@@ -288,12 +288,12 @@ namespace TriangleNet.Tools
 
                 // find intersection with plane x = m_pivot.dX
                 t = (pivot.x - triangle[k].x) / dx;
-                if (t < (1 + EPS) && t > -EPS)
+                if ((t < (1 + EPS)) && (t > -EPS))
                 {
                     // we have an intersection
-                    double yComponent = triangle[k].y + t * dy;
+                    double yComponent = triangle[k].y + (t * dy);
 
-                    if (yComponent < pivot.y && yComponent >= bounds.Bottom)
+                    if ((yComponent < pivot.y) && (yComponent >= bounds.Bottom))
                     {
                         AddToRegion(index, SW);
                         AddToRegion(index, SE);
@@ -307,12 +307,12 @@ namespace TriangleNet.Tools
 
                 // find intersection with plane x = m_boundingBox[0].dX
                 t = (bounds.Left - triangle[k].x) / dx;
-                if (t < (1 + EPS) && t > -EPS)
+                if ((t < (1 + EPS)) && (t > -EPS))
                 {
                     // we have an intersection
-                    double yComponent = triangle[k].y + t * dy;
+                    double yComponent = triangle[k].y + (t * dy);
 
-                    if (yComponent < pivot.y && yComponent >= bounds.Bottom)
+                    if ((yComponent < pivot.y) && (yComponent >= bounds.Bottom))
                     {
                         AddToRegion(index, SW);
                     }
@@ -324,12 +324,12 @@ namespace TriangleNet.Tools
 
                 // find intersection with plane x = m_boundingBox[1].dX
                 t = (bounds.Right - triangle[k].x) / dx;
-                if (t < (1 + EPS) && t > -EPS)
+                if ((t < (1 + EPS)) && (t > -EPS))
                 {
                     // we have an intersection
-                    double yComponent = triangle[k].y + t * dy;
+                    double yComponent = triangle[k].y + (t * dy);
 
-                    if (yComponent < pivot.y && yComponent >= bounds.Bottom)
+                    if ((yComponent < pivot.y) && (yComponent >= bounds.Bottom))
                     {
                         AddToRegion(index, SE);
                     }
@@ -346,12 +346,12 @@ namespace TriangleNet.Tools
 
                 // find intersection with plane y = m_pivot.dY
                 t = (pivot.y - triangle[k].y) / dy;
-                if (t < (1 + EPS) && t > -EPS)
+                if ((t < (1 + EPS)) && (t > -EPS))
                 {
                     // we have an intersection
-                    xComponent = triangle[k].x + t * dx;
+                    xComponent = triangle[k].x + (t * dx);
 
-                    if (xComponent > pivot.x && xComponent <= bounds.Right)
+                    if ((xComponent > pivot.x) && (xComponent <= bounds.Right))
                     {
                         AddToRegion(index, SE);
                         AddToRegion(index, NE);
@@ -365,12 +365,12 @@ namespace TriangleNet.Tools
 
                 // find intersection with plane y = m_boundingBox[0].dY
                 t = (bounds.Bottom - triangle[k].y) / dy;
-                if (t < (1 + EPS) && t > -EPS)
+                if ((t < (1 + EPS)) && (t > -EPS))
                 {
                     // we have an intersection
-                    xComponent = triangle[k].x + t * dx;
+                    xComponent = triangle[k].x + (t * dx);
 
-                    if (xComponent > pivot.x && xComponent <= bounds.Right)
+                    if ((xComponent > pivot.x) && (xComponent <= bounds.Right))
                     {
                         AddToRegion(index, SE);
                     }
@@ -382,12 +382,12 @@ namespace TriangleNet.Tools
 
                 // find intersection with plane y = m_boundingBox[1].dY
                 t = (bounds.Top - triangle[k].y) / dy;
-                if (t < (1 + EPS) && t > -EPS)
+                if ((t < (1 + EPS)) && (t > -EPS))
                 {
                     // we have an intersection
-                    xComponent = triangle[k].x + t * dx;
+                    xComponent = triangle[k].x + (t * dx);
 
-                    if (xComponent > pivot.x && xComponent <= bounds.Right)
+                    if ((xComponent > pivot.x) && (xComponent <= bounds.Right))
                     {
                         AddToRegion(index, NE);
                     }

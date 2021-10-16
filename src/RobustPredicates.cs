@@ -107,13 +107,13 @@ namespace TriangleNet
             } while ((check != 1.0) && (check != lastcheck));
             splitter += 1.0;
             // Error bounds for orientation and incircle tests. 
-            resulterrbound = (3.0 + 8.0 * epsilon) * epsilon;
-            ccwerrboundA = (3.0 + 16.0 * epsilon) * epsilon;
-            ccwerrboundB = (2.0 + 12.0 * epsilon) * epsilon;
-            ccwerrboundC = (9.0 + 64.0 * epsilon) * epsilon * epsilon;
-            iccerrboundA = (10.0 + 96.0 * epsilon) * epsilon;
-            iccerrboundB = (4.0 + 48.0 * epsilon) * epsilon;
-            iccerrboundC = (44.0 + 576.0 * epsilon) * epsilon * epsilon;
+            resulterrbound = (3.0 + (8.0 * epsilon)) * epsilon;
+            ccwerrboundA = (3.0 + (16.0 * epsilon)) * epsilon;
+            ccwerrboundB = (2.0 + (12.0 * epsilon)) * epsilon;
+            ccwerrboundC = (9.0 + (64.0 * epsilon)) * epsilon * epsilon;
+            iccerrboundA = (10.0 + (96.0 * epsilon)) * epsilon;
+            iccerrboundB = (4.0 + (48.0 * epsilon)) * epsilon;
+            iccerrboundC = (44.0 + (576.0 * epsilon)) * epsilon * epsilon;
             //o3derrboundA = (7.0 + 56.0 * epsilon) * epsilon;
             //o3derrboundB = (3.0 + 28.0 * epsilon) * epsilon;
             //o3derrboundC = (26.0 + 288.0 * epsilon) * epsilon * epsilon;
@@ -221,28 +221,28 @@ namespace TriangleNet
 
             bdxcdy = bdx * cdy;
             cdxbdy = cdx * bdy;
-            alift = adx * adx + ady * ady;
+            alift = (adx * adx) + (ady * ady);
 
             cdxady = cdx * ady;
             adxcdy = adx * cdy;
-            blift = bdx * bdx + bdy * bdy;
+            blift = (bdx * bdx) + (bdy * bdy);
 
             adxbdy = adx * bdy;
             bdxady = bdx * ady;
-            clift = cdx * cdx + cdy * cdy;
+            clift = (cdx * cdx) + (cdy * cdy);
 
-            det = alift * (bdxcdy - cdxbdy)
-                + blift * (cdxady - adxcdy)
-                + clift * (adxbdy - bdxady);
+            det = (alift * (bdxcdy - cdxbdy))
+                + (blift * (cdxady - adxcdy))
+                + (clift * (adxbdy - bdxady));
 
             if (Behavior.NoExact)
             {
                 return det;
             }
 
-            permanent = (Math.Abs(bdxcdy) + Math.Abs(cdxbdy)) * alift
-                      + (Math.Abs(cdxady) + Math.Abs(adxcdy)) * blift
-                      + (Math.Abs(adxbdy) + Math.Abs(bdxady)) * clift;
+            permanent = ((Math.Abs(bdxcdy) + Math.Abs(cdxbdy)) * alift)
+                      + ((Math.Abs(cdxady) + Math.Abs(adxcdy)) * blift)
+                      + ((Math.Abs(adxbdy) + Math.Abs(bdxady)) * clift);
             errbound = iccerrboundA * permanent;
             if ((det > errbound) || (-det > errbound))
             {
@@ -298,14 +298,14 @@ namespace TriangleNet
             ydo = dest.y - org.y;
             xao = apex.x - org.x;
             yao = apex.y - org.y;
-            dodist = xdo * xdo + ydo * ydo;
-            aodist = xao * xao + yao * yao;
-            dadist = (dest.x - apex.x) * (dest.x - apex.x) +
-                     (dest.y - apex.y) * (dest.y - apex.y);
+            dodist = (xdo * xdo) + (ydo * ydo);
+            aodist = (xao * xao) + (yao * yao);
+            dadist = ((dest.x - apex.x) * (dest.x - apex.x)) +
+                     ((dest.y - apex.y) * (dest.y - apex.y));
 
             if (Behavior.NoExact)
             {
-                denominator = 0.5 / (xdo * yao - xao * ydo);
+                denominator = 0.5 / ((xdo * yao) - (xao * ydo));
             }
             else
             {
@@ -317,8 +317,8 @@ namespace TriangleNet
                 Statistic.CounterClockwiseCount--;
             }
 
-            dx = (yao * dodist - ydo * aodist) * denominator;
-            dy = (xdo * aodist - xao * dodist) * denominator;
+            dx = ((yao * dodist) - (ydo * aodist)) * denominator;
+            dy = ((xdo * aodist) - (xao * dodist)) * denominator;
 
             // Find the (squared) length of the triangle's shortest edge.  This
             // serves as a conservative estimate of the insertion radius of the
@@ -330,11 +330,11 @@ namespace TriangleNet
                 if (offconstant > 0.0)
                 {
                     // Find the position of the off-center, as described by Alper Ungor.
-                    dxoff = 0.5 * xdo - offconstant * ydo;
-                    dyoff = 0.5 * ydo + offconstant * xdo;
+                    dxoff = (0.5 * xdo) - (offconstant * ydo);
+                    dyoff = (0.5 * ydo) + (offconstant * xdo);
                     // If the off-center is closer to the origin than the
                     // circumcenter, use the off-center instead.
-                    if (dxoff * dxoff + dyoff * dyoff < dx * dx + dy * dy)
+                    if (((dxoff * dxoff) + (dyoff * dyoff)) < ((dx * dx) + (dy * dy)))
                     {
                         dx = dxoff;
                         dy = dyoff;
@@ -345,11 +345,11 @@ namespace TriangleNet
             {
                 if (offconstant > 0.0)
                 {
-                    dxoff = 0.5 * xao + offconstant * yao;
-                    dyoff = 0.5 * yao - offconstant * xao;
+                    dxoff = (0.5 * xao) + (offconstant * yao);
+                    dyoff = (0.5 * yao) - (offconstant * xao);
                     // If the off-center is closer to the origin than the
                     // circumcenter, use the off-center instead.
-                    if (dxoff * dxoff + dyoff * dyoff < dx * dx + dy * dy)
+                    if (((dxoff * dxoff) + (dyoff * dyoff)) < ((dx * dx) + (dy * dy)))
                     {
                         dx = dxoff;
                         dy = dyoff;
@@ -360,12 +360,12 @@ namespace TriangleNet
             {
                 if (offconstant > 0.0)
                 {
-                    dxoff = 0.5 * (apex.x - dest.x) - offconstant * (apex.y - dest.y);
-                    dyoff = 0.5 * (apex.y - dest.y) + offconstant * (apex.x - dest.x);
+                    dxoff = (0.5 * (apex.x - dest.x)) - (offconstant * (apex.y - dest.y));
+                    dyoff = (0.5 * (apex.y - dest.y)) + (offconstant * (apex.x - dest.x));
                     // If the off-center is closer to the destination than the
                     // circumcenter, use the off-center instead.
-                    if (dxoff * dxoff + dyoff * dyoff <
-                        (dx - xdo) * (dx - xdo) + (dy - ydo) * (dy - ydo))
+                    if (((dxoff * dxoff) + (dyoff * dyoff)) <
+                        (((dx - xdo) * (dx - xdo)) + ((dy - ydo) * (dy - ydo))))
                     {
                         dx = xdo + dxoff;
                         dy = ydo + dyoff;
@@ -378,8 +378,8 @@ namespace TriangleNet
             // directed from the triangle's origin to its destination, and
             // an eta-axis, directed from its origin to its apex.
             // Calculate the xi and eta coordinates of the circumcenter.
-            xi = (yao * dx - xao * dy) * (2.0 * denominator);
-            eta = (xdo * dy - ydo * dx) * (2.0 * denominator);
+            xi = ((yao * dx) - (xao * dy)) * (2.0 * denominator);
+            eta = ((xdo * dy) - (ydo * dx)) * (2.0 * denominator);
 
             return new Point(org.x + dx, org.y + dy);
         }
@@ -417,12 +417,12 @@ namespace TriangleNet
             ydo = dest.y - org.y;
             xao = apex.x - org.x;
             yao = apex.y - org.y;
-            dodist = xdo * xdo + ydo * ydo;
-            aodist = xao * xao + yao * yao;
+            dodist = (xdo * xdo) + (ydo * ydo);
+            aodist = (xao * xao) + (yao * yao);
 
             if (Behavior.NoExact)
             {
-                denominator = 0.5 / (xdo * yao - xao * ydo);
+                denominator = 0.5 / ((xdo * yao) - (xao * ydo));
             }
             else
             {
@@ -434,16 +434,16 @@ namespace TriangleNet
                 Statistic.CounterClockwiseCount--;
             }
 
-            dx = (yao * dodist - ydo * aodist) * denominator;
-            dy = (xdo * aodist - xao * dodist) * denominator;
+            dx = ((yao * dodist) - (ydo * aodist)) * denominator;
+            dy = ((xdo * aodist) - (xao * dodist)) * denominator;
 
             // To interpolate vertex attributes for the new vertex inserted at
             // the circumcenter, define a coordinate system with a xi-axis,
             // directed from the triangle's origin to its destination, and
             // an eta-axis, directed from its origin to its apex.
             // Calculate the xi and eta coordinates of the circumcenter.
-            xi = (yao * dx - xao * dy) * (2.0 * denominator);
-            eta = (xdo * dy - ydo * dx) * (2.0 * denominator);
+            xi = ((yao * dx) - (xao * dy)) * (2.0 * denominator);
+            eta = ((xdo * dy) - (ydo * dx)) * (2.0 * denominator);
 
             return new Point(org.x + dx, org.y + dy);
         }
@@ -730,9 +730,9 @@ namespace TriangleNet
                 return det;
             }
 
-            errbound = ccwerrboundC * detsum + resulterrbound * ((det) >= 0.0 ? (det) : -(det));
-            det += (acx * bcytail + bcy * acxtail)
-                 - (acy * bcxtail + bcx * acytail);
+            errbound = (ccwerrboundC * detsum) + (resulterrbound * ((det) >= 0.0 ? (det) : -(det)));
+            det += ((acx * bcytail) + (bcy * acxtail))
+                 - ((acy * bcxtail) + (bcx * acytail));
             if ((det >= errbound) || (-det >= errbound))
             {
                 return det;
@@ -902,13 +902,13 @@ namespace TriangleNet
                 return det;
             }
 
-            errbound = iccerrboundC * permanent + resulterrbound * ((det) >= 0.0 ? (det) : -(det));
-            det += ((adx * adx + ady * ady) * ((bdx * cdytail + cdy * bdxtail) - (bdy * cdxtail + cdx * bdytail))
-                    + 2.0 * (adx * adxtail + ady * adytail) * (bdx * cdy - bdy * cdx))
-                 + ((bdx * bdx + bdy * bdy) * ((cdx * adytail + ady * cdxtail) - (cdy * adxtail + adx * cdytail))
-                    + 2.0 * (bdx * bdxtail + bdy * bdytail) * (cdx * ady - cdy * adx))
-                 + ((cdx * cdx + cdy * cdy) * ((adx * bdytail + bdy * adxtail) - (ady * bdxtail + bdx * adytail))
-                    + 2.0 * (cdx * cdxtail + cdy * cdytail) * (adx * bdy - ady * bdx));
+            errbound = (iccerrboundC * permanent) + (resulterrbound * ((det) >= 0.0 ? (det) : -(det)));
+            det += ((((adx * adx) + (ady * ady)) * (((bdx * cdytail) + (cdy * bdxtail)) - ((bdy * cdxtail) + (cdx * bdytail))))
+                    + (2.0 * ((adx * adxtail) + (ady * adytail)) * ((bdx * cdy) - (bdy * cdx))))
+                 + ((((bdx * bdx) + (bdy * bdy)) * (((cdx * adytail) + (ady * cdxtail)) - ((cdy * adxtail) + (adx * cdytail))))
+                    + (2.0 * ((bdx * bdxtail) + (bdy * bdytail)) * ((cdx * ady) - (cdy * adx))))
+                 + ((((cdx * cdx) + (cdy * cdy)) * (((adx * bdytail) + (bdy * adxtail)) - ((ady * bdxtail) + (bdx * adytail))))
+                    + (2.0 * ((cdx * cdxtail) + (cdy * cdytail)) * ((adx * bdy) - (ady * bdx))));
             if ((det >= errbound) || (-det >= errbound))
             {
                 return det;

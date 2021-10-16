@@ -133,11 +133,11 @@ namespace TriangleNet.Meshing
 
             for (i = 0; i <= nx; i++)
             {
-                x = left + i * dx;
+                x = left + (i * dx);
 
                 for (j = 0; j <= ny; j++)
                 {
-                    y = bottom + j * dy;
+                    y = bottom + (j * dy);
 
                     points[n++] = new Vertex(x, y);
                 }
@@ -171,8 +171,8 @@ namespace TriangleNet.Meshing
                 a.Label = b.Label = 1;
 
                 // Right
-                a = points[nx * (ny + 1) + j];
-                b = points[nx * (ny + 1) + (j + 1)];
+                a = points[(nx * (ny + 1)) + j];
+                b = points[(nx * (ny + 1)) + (j + 1)];
 
                 segments.Add(new Segment(a, b, 1));
 
@@ -190,8 +190,8 @@ namespace TriangleNet.Meshing
                 a.Label = b.Label = 1;
 
                 // Top
-                a = points[ny + (ny + 1) * i];
-                b = points[ny + (ny + 1) * (i + 1)];
+                a = points[ny + ((ny + 1) * i)];
+                b = points[ny + ((ny + 1) * (i + 1))];
 
                 segments.Add(new Segment(a, b, 1));
 
@@ -207,12 +207,12 @@ namespace TriangleNet.Meshing
             {
                 for (j = 0; j < ny; j++)
                 {
-                    k = j + (ny + 1) * i;
-                    l = j + (ny + 1) * (i + 1);
+                    k = j + ((ny + 1) * i);
+                    l = j + ((ny + 1) * (i + 1));
 
                     // Create 2 triangles in rectangle [k, l, l + 1, k + 1].
 
-                    if ((i + j) % 2 == 0)
+                    if (((i + j) % 2) == 0)
                     {
                         // Diagonal from bottom left to top right.
                         triangles[n++] = new InputTriangle(k, l, l + 1);

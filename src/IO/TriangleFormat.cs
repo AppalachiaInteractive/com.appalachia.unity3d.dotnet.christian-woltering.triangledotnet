@@ -21,7 +21,7 @@ namespace TriangleNet.IO
         {
             string ext = Path.GetExtension(file).ToLower();
 
-            if (ext == ".node" || ext == ".poly" || ext == ".ele")
+            if ((ext == ".node") || (ext == ".poly") || (ext == ".ele"))
             {
                 return true;
             }
@@ -33,14 +33,14 @@ namespace TriangleNet.IO
         {
             string ext = Path.GetExtension(filename);
 
-            if (ext == ".node" || ext == ".poly" || ext == ".ele")
+            if ((ext == ".node") || (ext == ".poly") || (ext == ".ele"))
             {
                 List<ITriangle> triangles;
                 Polygon geometry;
 
                 (new TriangleReader()).Read(filename, out geometry, out triangles);
 
-                if (geometry != null && triangles != null)
+                if ((geometry != null) && (triangles != null))
                 {
                     return Converter.ToMesh(geometry, triangles.ToArray());
                 }

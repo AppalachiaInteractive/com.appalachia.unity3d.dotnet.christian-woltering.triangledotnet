@@ -15,29 +15,29 @@ namespace TriangleNet
     /// </summary>
     class Behavior
     {
-        bool poly = false;
-        bool quality = false;
-        bool varArea = false;
-        bool convex = false;
-        bool jettison = false;
+        bool poly;
+        bool quality;
+        bool varArea;
+        bool convex;
+        bool jettison;
         bool boundaryMarkers = true;
-        bool noHoles = false;
-        bool conformDel = false;
+        bool noHoles;
+        bool conformDel;
 
         Func<ITriangle, double, bool> usertest;
 
-        int noBisect = 0;
+        int noBisect;
 
-        double minAngle = 0.0;
-        double maxAngle = 0.0;
+        double minAngle;
+        double maxAngle;
         double maxArea = -1.0;
 
-        public bool fixedArea = false;
+        public bool fixedArea;
         public bool useSegments = true;
         public bool useRegions = false;
-        public double goodAngle = 0.0;
-        public double maxGoodAngle = 0.0;
-        public double offconstant = 0.0;
+        public double goodAngle;
+        public double maxGoodAngle;
+        public double offconstant;
 
         /// <summary>
         /// Creates an instance of the Behavior class.
@@ -60,7 +60,7 @@ namespace TriangleNet
         {
             this.quality = true;
 
-            if (this.minAngle < 0 || this.minAngle > 60)
+            if ((this.minAngle < 0) || (this.minAngle > 60))
             {
                 this.minAngle = 0;
                 this.quality = false;
@@ -68,7 +68,7 @@ namespace TriangleNet
                 Log.Instance.Warning("Invalid quality option (minimum angle).", "Mesh.Behavior");
             }
 
-            if ((this.maxAngle != 0.0) && (this.maxAngle < 60 || this.maxAngle > 180))
+            if ((this.maxAngle != 0.0) && ((this.maxAngle < 60) || (this.maxAngle > 180)))
             {
                 this.maxAngle = 0;
                 this.quality = false;
@@ -77,8 +77,8 @@ namespace TriangleNet
             }
 
             this.useSegments = this.Poly || this.Quality || this.Convex;
-            this.goodAngle = Math.Cos(this.MinAngle * Math.PI / 180.0);
-            this.maxGoodAngle = Math.Cos(this.MaxAngle * Math.PI / 180.0);
+            this.goodAngle = Math.Cos((this.MinAngle * Math.PI) / 180.0);
+            this.maxGoodAngle = Math.Cos((this.MaxAngle * Math.PI) / 180.0);
 
             if (this.goodAngle == 1.0)
             {
@@ -209,7 +209,7 @@ namespace TriangleNet
             set
             {
                 noBisect = value;
-                if (noBisect < 0 || noBisect > 2)
+                if ((noBisect < 0) || (noBisect > 2))
                 {
                     noBisect = 0;
                 }

@@ -166,7 +166,7 @@ namespace TriangleNet.Voronoi
 
                     nid = neighbor.tri.id;
 
-                    if (id < nid || nid < 0)
+                    if ((id < nid) || (nid < 0))
                     {
                         // Get the endpoints of the current triangle edge.
                         org = tri.Org();

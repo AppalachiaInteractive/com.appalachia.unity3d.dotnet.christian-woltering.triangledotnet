@@ -154,19 +154,19 @@ namespace TriangleNet.Geometry
 
         public int CompareTo(Point other)
         {
-            if (x == other.x && y == other.y)
+            if ((x == other.x) && (y == other.y))
             {
                 return 0;
             }
 
-            return (x < other.x || (x == other.x && y < other.y)) ? -1 : 1;
+            return ((x < other.x) || ((x == other.x) && (y < other.y))) ? -1 : 1;
         }
 
         public override int GetHashCode()
         {
             int hash = 19;
-            hash = hash * 31 + x.GetHashCode();
-            hash = hash * 31 + y.GetHashCode();
+            hash = (hash * 31) + x.GetHashCode();
+            hash = (hash * 31) + y.GetHashCode();
 
             return hash;
         }

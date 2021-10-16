@@ -52,7 +52,7 @@ namespace TriangleNet.IO
         {
             foreach (IPolygonFormat format in formats)
             {
-                if (format != null && format.IsSupported(filename))
+                if ((format != null) && format.IsSupported(filename))
                 {
                     return format.Read(filename);
                 }
@@ -70,7 +70,7 @@ namespace TriangleNet.IO
         {
             foreach (IPolygonFormat format in formats)
             {
-                if (format != null && format.IsSupported(filename))
+                if ((format != null) && format.IsSupported(filename))
                 {
                     format.Write(polygon, filename);
                     return;
@@ -93,7 +93,7 @@ namespace TriangleNet.IO
         {
             foreach (IMeshFormat format in formats)
             {
-                if (format != null && format.IsSupported(filename))
+                if ((format != null) && format.IsSupported(filename))
                 {
                     return format.Import(filename);
                 }
@@ -111,7 +111,7 @@ namespace TriangleNet.IO
         {
             foreach (IMeshFormat format in formats)
             {
-                if (format != null && format.IsSupported(filename))
+                if ((format != null) && format.IsSupported(filename))
                 {
                     format.Write(mesh, filename);
                     return;

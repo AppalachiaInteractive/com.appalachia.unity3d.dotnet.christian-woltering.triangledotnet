@@ -137,7 +137,7 @@ namespace TriangleNet.IO
         private void WriteMesh(Mesh mesh, bool skip)
         {
             // Mesh may have changed, but we choose to skip
-            if (triangles == mesh.triangles.Count && skip)
+            if ((triangles == mesh.triangles.Count) && skip)
             {
                 return;
             }
@@ -229,7 +229,7 @@ namespace TriangleNet.IO
 
         private bool VerticesChanged(Mesh mesh)
         {
-            if (vertices == null || mesh.Vertices.Count != vertices.Length)
+            if ((vertices == null) || (mesh.Vertices.Count != vertices.Length))
             {
                 return true;
             }
@@ -248,7 +248,7 @@ namespace TriangleNet.IO
 
         private void HashVertices(Mesh mesh)
         {
-            if (vertices == null || mesh.Vertices.Count != vertices.Length)
+            if ((vertices == null) || (mesh.Vertices.Count != vertices.Length))
             {
                 vertices = new int[mesh.Vertices.Count];
             }

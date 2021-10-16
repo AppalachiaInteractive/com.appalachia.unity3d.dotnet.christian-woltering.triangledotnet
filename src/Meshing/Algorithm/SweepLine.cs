@@ -23,8 +23,8 @@ namespace TriangleNet.Meshing.Algorithm
 
         static int randomnation(int choices)
         {
-            randomseed = (randomseed * 1366 + 150889) % 714025;
-            return randomseed / (714025 / choices + 1);
+            randomseed = ((randomseed * 1366) + 150889) % 714025;
+            return randomseed / ((714025 / choices) + 1);
         }
 
         IPredicates predicates;
@@ -42,7 +42,7 @@ namespace TriangleNet.Meshing.Algorithm
 
             // Nonexistent x value used as a flag to mark circle events in sweepline
             // Delaunay algorithm.
-            xminextreme = 10 * mesh.bounds.Left - 9 * mesh.bounds.Right;
+            xminextreme = (10 * mesh.bounds.Left) - (9 * mesh.bounds.Right);
 
             SweepEvent[] eventheap;
 
@@ -301,7 +301,7 @@ namespace TriangleNet.Meshing.Algorithm
             thisevent = heap[eventnum];
             eventx = thisevent.xkey;
             eventy = thisevent.ykey;
-            leftchild = 2 * eventnum + 1;
+            leftchild = (2 * eventnum) + 1;
             notdone = leftchild < heapsize;
             while (notdone)
             {
@@ -337,7 +337,7 @@ namespace TriangleNet.Meshing.Algorithm
                     thisevent.heapposition = smallest;
 
                     eventnum = smallest;
-                    leftchild = 2 * eventnum + 1;
+                    leftchild = (2 * eventnum) + 1;
                     notdone = leftchild < heapsize;
                 }
             }
@@ -609,9 +609,9 @@ namespace TriangleNet.Meshing.Algorithm
             yac = pa.y - pc.y;
             xbc = pb.x - pc.x;
             ybc = pb.y - pc.y;
-            aclen2 = xac * xac + yac * yac;
-            bclen2 = xbc * xbc + ybc * ybc;
-            searchpoint.x = pc.x - (yac * bclen2 - ybc * aclen2) / (2.0 * ccwabc);
+            aclen2 = (xac * xac) + (yac * yac);
+            bclen2 = (xbc * xbc) + (ybc * ybc);
+            searchpoint.x = pc.x - (((yac * bclen2) - (ybc * aclen2)) / (2.0 * ccwabc));
             searchpoint.y = topy;
             return SplayInsert(Splay(splayroot, searchpoint, ref dummytri), newkey, searchpoint);
         }
@@ -647,7 +647,7 @@ namespace TriangleNet.Meshing.Algorithm
             dya = leftvertex.y - newsite.y;
             dxb = rightvertex.x - newsite.x;
             dyb = rightvertex.y - newsite.y;
-            return dya * (dxb * dxb + dyb * dyb) > dyb * (dxa * dxa + dya * dya);
+            return (dya * ((dxb * dxb) + (dyb * dyb))) > (dyb * ((dxa * dxa) + (dya * dya)));
         }
 
         double CircleTop(Vertex pa, Vertex pb, Vertex pc, double ccwabc)
@@ -663,10 +663,10 @@ namespace TriangleNet.Meshing.Algorithm
             ybc = pb.y - pc.y;
             xab = pa.x - pb.x;
             yab = pa.y - pb.y;
-            aclen2 = xac * xac + yac * yac;
-            bclen2 = xbc * xbc + ybc * ybc;
-            ablen2 = xab * xab + yab * yab;
-            return pc.y + (xac * bclen2 - xbc * aclen2 + Math.Sqrt(aclen2 * bclen2 * ablen2)) / (2.0 * ccwabc);
+            aclen2 = (xac * xac) + (yac * yac);
+            bclen2 = (xbc * xbc) + (ybc * ybc);
+            ablen2 = (xab * xab) + (yab * yab);
+            return pc.y + ((((xac * bclen2) - (xbc * aclen2)) + Math.Sqrt(aclen2 * bclen2 * ablen2)) / (2.0 * ccwabc));
         }
 
         void Check4DeadEvent(ref Otri checktri, SweepEvent[] eventheap, ref int heapsize)

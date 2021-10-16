@@ -109,7 +109,7 @@ namespace TriangleNet.IO
 
             foreach (var vertex in nodes)
             {
-                if (!jettison || vertex.type != VertexType.UndeadVertex)
+                if (!jettison || (vertex.type != VertexType.UndeadVertex))
                 {
                     // Vertex number, x and y coordinates.
                     writer.Write("{0} {1} {2}", index, vertex.x.ToString(nfi), vertex.y.ToString(nfi));

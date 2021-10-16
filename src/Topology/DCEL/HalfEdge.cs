@@ -87,7 +87,7 @@ namespace TriangleNet.Topology.DCEL
             this.face = face;
 
             // IMPORTANT: do not remove the (face.edge == null) check!
-            if (face != null && face.edge == null)
+            if ((face != null) && (face.edge == null))
             {
                 face.edge = this;
             }

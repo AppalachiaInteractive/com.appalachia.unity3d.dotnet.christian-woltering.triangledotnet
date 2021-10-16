@@ -282,7 +282,7 @@ namespace TriangleNet.Voronoi.Legacy
             double maxY = bounds.Top;
 
             // Check if point is inside the bounds
-            if (x < minX || x > maxX || y < minY || y > maxY)
+            if ((x < minX) || (x > maxX) || (y < minY) || (y > maxY))
             {
                 intersect = null;
                 return false;
@@ -294,14 +294,14 @@ namespace TriangleNet.Voronoi.Legacy
                 // Line going to the left: intersect with x = minX
                 t1 = (minX - x) / dx;
                 x1 = minX;
-                y1 = y + t1 * dy;
+                y1 = y + (t1 * dy);
             }
             else if (dx > 0)
             {
                 // Line going to the right: intersect with x = maxX
                 t1 = (maxX - x) / dx;
                 x1 = maxX;
-                y1 = y + t1 * dy;
+                y1 = y + (t1 * dy);
             }
             else
             {
@@ -315,14 +315,14 @@ namespace TriangleNet.Voronoi.Legacy
             {
                 // Line going downwards: intersect with y = minY
                 t2 = (minY - y) / dy;
-                x2 = x + t2 * dx;
+                x2 = x + (t2 * dx);
                 y2 = minY;
             }
             else if (dy > 0)
             {
                 // Line going upwards: intersect with y = maxY
                 t2 = (maxY - y) / dy;
-                x2 = x + t2 * dx;
+                x2 = x + (t2 * dx);
                 y2 = maxY;
             }
             else
@@ -371,7 +371,7 @@ namespace TriangleNet.Voronoi.Legacy
                     }
                 }
 
-                if (region.Bounded && first != null)
+                if (region.Bounded && (first != null))
                 {
                     edges.Add(new Edge(last.id, first.id));
                 }

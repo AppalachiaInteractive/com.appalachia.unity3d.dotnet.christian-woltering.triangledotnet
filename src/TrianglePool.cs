@@ -8,7 +8,6 @@ namespace TriangleNet
 {
     using System;
     using System.Collections.Generic;
-    using TriangleNet.Geometry;
     using TriangleNet.Topology;
 
     public class TrianglePool : ICollection<Triangle>
@@ -78,7 +77,7 @@ namespace TriangleNet
                     pool[block] = new Triangle[BLOCKSIZE];
 
                     // Check if the pool has to be resized.
-                    if (block + 1 == pool.Length)
+                    if ((block + 1) == pool.Length)
                     {
                         Array.Resize(ref pool, 2 * pool.Length);
                     }
@@ -184,7 +183,7 @@ namespace TriangleNet
                 var block = pool[i];
 
                 // Number of triangles in current block:
-                int length = (size - i * BLOCKSIZE) % BLOCKSIZE;
+                int length = (size - (i * BLOCKSIZE)) % BLOCKSIZE;
 
                 for (int j = 0; j < length; j++)
                 {
@@ -199,7 +198,7 @@ namespace TriangleNet
         {
             int i = item.hash;
 
-            if (i < 0 || i > size)
+            if ((i < 0) || (i > size))
             {
                 return false;
             }
