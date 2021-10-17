@@ -12,6 +12,12 @@
 ## Releasing
 | Hash | Date | Author | Changes |
 |------|------|--------|---------|
+| 11bace5bc11f9e1992c6739207175d88521ca8f1 | 2021-10-17 | Chris Schubert | Fixing doozy input issues |
+
+
+ ## Tag: `v0.1.3`
+| Hash | Date | Author | Changes |
+|------|------|--------|---------|
 | 1a461f117456002b1f75baf671ce981462890a6f | 2021-10-16 | Chris Schubert | UI project cleanup and integration completed |
 | 72ca14a3f0fd1fe98325d3db8c93ec85422dd97b | 2021-10-16 | Chris Schubert | More project cleanup and refactoring |
 | 030e5dfc66b5193ad0da0310a550c00a4c75fbb4 | 2021-10-12 | Chris Schubert | Code cleanup and project restructuring |
