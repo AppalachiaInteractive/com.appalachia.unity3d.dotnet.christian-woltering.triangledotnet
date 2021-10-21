@@ -12,6 +12,11 @@
 ## Releasing
 | Hash | Date | Author | Changes |
 |------|------|--------|---------|
+
+
+ ## Tag: `v0.1.4, origin/main`
+| Hash | Date | Author | Changes |
+|------|------|--------|---------|
 | 11bace5bc11f9e1992c6739207175d88521ca8f1 | 2021-10-17 | Chris Schubert | Fixing doozy input issues |
 
 
